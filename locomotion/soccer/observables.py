@@ -327,6 +327,22 @@ class CoreObservablesAdder(ObservablesAdder):
     player.walker.observables.add_observable(
         'stats_vel_ball_to_goal',
         base_observable.Generic(_stats_vel_ball_to_goal))
+    
+    def _stats_vector_ball_to_goal(physics):
+      """Ball distance towards opponents' goal."""
+      if player.team == team_lib.Team.HOME:
+        goal = task.arena.away_goal
+      else:
+        goal = task.arena.home_goal
+
+      goal_center = (goal.upper + goal.lower) / 2.
+      direction = goal_center - physics.bind(task.ball.geom).xpos
+
+      return direction
+
+    player.walker.observables.add_observable(
+        'stats_vector_ball_to_goal',
+        base_observable.Generic(_stats_vector_ball_to_goal))
 
     def _stats_avg_teammate_dist(physics):
       """Compute average distance from `walker` to its teammates."""
