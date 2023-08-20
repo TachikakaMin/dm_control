@@ -122,8 +122,10 @@ def load(team_size,
     ValueError: If `walker_type` is not recognized.
   """
   goal_size = None
-  min_size = (32, 24)
-  max_size = (48, 36)
+  # min_size = (32, 24)
+  # max_size = (48, 36)
+  min_size=(20, 15)
+  max_size=(24, 18)
   ball = SoccerBall()
 
   if walker_type == WalkerType.HUMANOID:

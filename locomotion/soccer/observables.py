@@ -311,12 +311,10 @@ class CoreObservablesAdder(ObservablesAdder):
     def _stats_vel_ball_to_goal(physics):
       """Ball velocity towards opponents' goal."""
       if player.team == team_lib.Team.HOME:
-        goal = task.arena.away_goal
+        goal = task.arena.away_goal.mid
       else:
-        goal = task.arena.home_goal
-
-      goal_center = (goal.upper + goal.lower) / 2.
-      direction = goal_center - physics.bind(task.ball.geom).xpos
+        goal = task.arena.home_goal.mid
+      direction = goal - physics.bind(task.ball.geom).xpos
       ball_vel_observable = task.ball.observables.linear_velocity
       ball_vel = ball_vel_observable.observation_callable(physics)()
 
@@ -331,12 +329,11 @@ class CoreObservablesAdder(ObservablesAdder):
     def _stats_vector_ball_to_goal(physics):
       """Ball distance towards opponents' goal."""
       if player.team == team_lib.Team.HOME:
-        goal = task.arena.away_goal
+        goal = task.arena.away_goal.mid
       else:
-        goal = task.arena.home_goal
+        goal = task.arena.home_goal.mid
 
-      goal_center = (goal.upper + goal.lower) / 2.
-      direction = goal_center - physics.bind(task.ball.geom).xpos
+      direction = goal - physics.bind(task.ball.geom).xpos
 
       return direction
 
